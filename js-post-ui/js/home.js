@@ -4,13 +4,15 @@ import {
   initPagination,
   renderPostList,
   renderPagination,
+  toast,
 } from "./utils";
 
 async function handleFilterChange(filterName, filterValue) {
   try {
     // update query params;
     const url = new URL(window.location);
-    url.searchParams.set(filterName, filterValue);
+
+    if (filterName) url.searchParams.set(filterName, filterValue);
     if (filterName === "title_like") url.searchParams.set("_page", 1);
 
     history.pushState({}, "", url);
@@ -23,6 +25,28 @@ async function handleFilterChange(filterName, filterValue) {
   }
 }
 
+function registerPostDeleteEvent() {
+  document.addEventListener("post-delete", async (event) => {
+    try {
+      const post = event.detail;
+      const message = `Are you sure you want to delete "${post.title}"?`;
+      if (window.confirm(message)) {
+        await postApi.remove(post.id);
+        await handleFilterChange();
+
+        toast.success("Remove post successfully");
+      }
+    } catch (error) {
+      console.log("failed fo remove post", error);
+    }
+    console.log("remove post click", event.detail);
+    //call API to remove post by if;
+
+    //refetch data
+  });
+}
+
+//main
 (async () => {
   try {
     // update query params;
@@ -33,6 +57,8 @@ async function handleFilterChange(filterName, filterValue) {
 
     history.pushState({}, "", url);
     const queryParams = url.searchParams;
+
+    registerPostDeleteEvent();
 
     // attach click event for limits
     initPagination({

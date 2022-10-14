@@ -32,7 +32,7 @@ const postApi = {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
-  remore(id) {
+  remove(id) {
     const url = `/posts/${id}`;
     return axiosClient.delete(url);
   },
