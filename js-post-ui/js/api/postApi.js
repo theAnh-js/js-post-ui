@@ -18,7 +18,7 @@ const postApi = {
   },
   update(data) {
     const url = `/posts/${data.id}`;
-    return patch(url, data);
+    return axiosClient.patch(url, data);
   },
   remore(id) {
     const url = `/posts/${id}`;
