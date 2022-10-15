@@ -83,3 +83,9 @@ ul {
 .nav .nav__link > i {
   margin-right: 5px;
 }
+.top-nav {
+  background-color: #b3bccb;
+}
+footer {
+  background-color: rgb(13 110 253 / 25%);
+}

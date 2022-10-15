@@ -53,7 +53,7 @@ function registerPostDeleteEvent() {
     const url = new URL(window.location);
 
     if (!url.searchParams.get("_page")) url.searchParams.set("_page", 1);
-    if (!url.searchParams.get("_limit")) url.searchParams.set("_limit", 9);
+    if (!url.searchParams.get("_limit")) url.searchParams.set("_limit", 12);
 
     history.pushState({}, "", url);
     const queryParams = url.searchParams;
